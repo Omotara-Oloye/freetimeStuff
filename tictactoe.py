@@ -73,4 +73,7 @@ def play_game():
         if(current_player == 'X'):
             current_player = 'O'
         else:
-             current_player = 'X'       
+             current_player = 'X' 
+
+if __name__ == '__main__':
+    play_game()
