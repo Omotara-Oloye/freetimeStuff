@@ -1,6 +1,6 @@
 import pytest
 
-from tictactoe import has_won, main
+from tictactoe import ask_to_play_again, has_won, main
 
 
 @pytest.mark.parametrize(
@@ -49,3 +49,14 @@ def test_play_again(monkeypatch, capsys, moves, result, replay):
         assert empty_board + "Player X, enter your move 1-9:" in rounds[1]
         assert "Player X has won the game" in rounds[1]
     assert not rounds[-1].strip()
+
+
+def test_play_again_stops_at_eof(monkeypatch, capsys):
+    def end_of_input(prompt):
+        print(prompt, end="")
+        raise EOFError
+
+    monkeypatch.setattr("builtins.input", end_of_input)
+
+    assert ask_to_play_again() is False
+    assert capsys.readouterr().out == "Play Again? (y/n): \n"

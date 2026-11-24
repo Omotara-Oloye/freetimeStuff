@@ -134,7 +134,12 @@ def play_game():
 
 def ask_to_play_again():
     while True:
-        answer = input("Play Again? (y/n): ").strip().lower()
+        try:
+            answer = input("Play Again? (y/n): ")
+        except EOFError:
+            print()
+            return False
+        answer = answer.strip().lower()
         if answer in ('y', 'yes'):
             return True
         if answer in ('n', 'no'):
