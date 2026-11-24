@@ -124,12 +124,28 @@ def play_game():
             print_board(board)
             break
         if(is_full(board)):
-            print("All slots have been filled resulting in a tie game. Play Again?")
+            print("All slots have been filled resulting in a tie game.")
             print_board(board)
             break
         if(current_player == 'X'):
             current_player = 'O'
         else:
              current_player = 'X'       
+
+def ask_to_play_again():
+    while True:
+        answer = input("Play Again? (y/n): ").strip().lower()
+        if answer in ('y', 'yes'):
+            return True
+        if answer in ('n', 'no'):
+            return False
+        print("Please enter yes or no.")
+
+def main():
+    while True:
+        play_game()
+        if not ask_to_play_again():
+            break
+
 if __name__ == '__main__':
-    play_game()
+    main()
